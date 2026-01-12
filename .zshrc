@@ -38,3 +38,10 @@ fastfetch --config "$RANDOM_THEME"
 # --- END: AUTO RANDOM FASTFETCH ---
 
 alias fastfetch='fastfetch --config "$(find ~/.local/share/fastfetch -name "*.jsonc" | shuf -n 1)"'
+
+# --- SHORTCUT SAKLAR GPU (EnvyControl) ---
+alias mode-hemat='sudo envycontrol -s integrated; echo "Mode Hemat Aktif. Silakan Restart."'
+alias mode-game='sudo envycontrol -s hybrid; echo "Mode Game Aktif. Silakan Restart."'
+
+# Cek Status
+alias cek-gpu='nvtop'

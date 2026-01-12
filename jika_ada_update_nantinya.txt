@@ -1,4 +1,4 @@
-Langkah awal
+Langkah awal:
 # 1. Salin Config ZSH
 cp ~/.zshrc ~/dotfiles/
 
@@ -14,6 +14,7 @@ cp -r ~/.config/fastfetch ~/dotfiles/
 mkdir -p ~/dotfiles/niri
 cp ~/.config/niri/config.kdl ~/dotfiles/niri/
 
+Setelah itu:
 cd ~/dotfiles
 git add .
 git commit -m "Update konfigurasi terbaru"
