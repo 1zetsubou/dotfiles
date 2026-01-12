@@ -1,0 +1,21 @@
+Langkah awal:
+# 1. Salin Config ZSH
+cp ~/.zshrc ~/dotfiles/
+
+# 2. Salin Config Kitty
+# Kita buat folder strukturnya dulu agar rapi
+mkdir -p ~/dotfiles/kitty
+cp ~/.config/kitty/kitty.conf ~/dotfiles/kitty/
+
+# 3. Salin Config Fastfetch (Tema-tema tadi)
+cp -r ~/.config/fastfetch ~/dotfiles/
+
+# 4. Salin Config Niri
+mkdir -p ~/dotfiles/niri
+cp ~/.config/niri/config.kdl ~/dotfiles/niri/
+
+Setelah itu:
+cd ~/dotfiles
+git add .
+git commit -m "Update konfigurasi terbaru"
+git push
