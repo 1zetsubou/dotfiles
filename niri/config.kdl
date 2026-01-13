@@ -229,9 +229,20 @@ layout {
     }
 }
 
-
 spawn-at-startup "niri-float-sticky"
-spawn-at-startup "/usr/libexec/polkit-gnome-authentication-agent-1"
+// Perbaikan path Polkit untuk Arch/CachyOS
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "udiskie" "--tray"
+
+// Logika: 
+// 1. timeout 300s (5 menit) -> matikan layar
+// 2. timeout 310s -> kunci layar (pakai dms lock)
+// 3. before-sleep (tutup laptop) -> kunci layar langsung
+
+spawn-at-startup "swayidle" "-w" \
+    "timeout" "300" "niri msg action power-off-monitors" \
+    "timeout" "310" "dms ipc call lock lock" \
+    "before-sleep" "dms ipc call lock lock"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -405,7 +416,7 @@ window-rule {
 // Opsional: Paksa Terminal (Kitty/Alacritty) selalu agak transparan meski aktif
 window-rule {
     match app-id="kitty$"
-    match app-id="Alacritty$"
+    match app-id="org.gnome.Loupe$"
     opacity 0.85
     // 2. INI SOLUSINYA:
     // Perintah ini menyuruh Niri: "Jangan gambar kotak solid di belakang jendela ini!"
@@ -416,10 +427,11 @@ window-rule {
 window-rule {
    match app-id="org.gnome.Nautilus$"
    match app-id="google-chrome$"
+   match app-id="code$"
+   match app-id="Antigravity$"
    open-maximized true
    // default-column-width { fixed 1300; }
 }
-
 
 overview {
     zoom 0.75
@@ -703,6 +715,8 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    Mod+DELETE { spawn "dms" "ipc" "call" "lock" "lock"; }
 }
 
 include "dms/outputs.kdl"
